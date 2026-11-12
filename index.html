@@ -64,36 +64,30 @@
   .st-4 { color: #94a3b8; }                          /* production */
   .st-9 { color: #64748b; }                          /* kosong */
   .judul { font-weight: 600; margin: 0 0 4px; }
-  .meta { font-size: 12.5px; color: var(--muted); margin-bottom: 10px; }
-  .links { display: flex; gap: 8px; flex-wrap: wrap; }
-  .links a {
-    display: inline-block; text-decoration: none; font-size: 13px; font-weight: 600;
-    color: var(--accent); border: 1px solid #3a3a5e; border-radius: 8px; padding: 6px 12px;
+  .field { margin-top: 12px; }
+  .flabel {
+    font-size: 11.5px; font-weight: 700; text-transform: uppercase;
+    letter-spacing: .05em; color: var(--muted); margin-bottom: 3px;
+    display: flex; align-items: center; gap: 8px;
   }
-  .links a:hover { background: #1a1629; }
-  .links .filechip {
-    font-size: 12px; color: var(--muted); border: 1px dashed var(--border);
-    border-radius: 8px; padding: 6px 10px; word-break: break-all;
+  .rawlink {
+    color: var(--accent); text-decoration: none; font-size: 13px;
+    word-break: break-all; line-height: 1.5;
   }
-  .linkpair { display: inline-flex; align-items: center; gap: 6px; }
+  .rawlink:hover { text-decoration: underline; }
+  .filechip { font-size: 13px; color: var(--muted); word-break: break-all; line-height: 1.5; }
+  .captext {
+    white-space: pre-wrap; word-break: break-word; font-size: 13.5px;
+    line-height: 1.6; color: var(--text);
+  }
   .copy {
     background: none; color: var(--muted); border: 1px solid var(--border);
-    border-radius: 8px; padding: 6px 12px; font: inherit; font-size: 13px;
-    cursor: pointer; white-space: nowrap;
+    border-radius: 6px; padding: 2px 9px; font: inherit; font-size: 11.5px;
+    cursor: pointer; white-space: nowrap; letter-spacing: 0; text-transform: none;
+    font-weight: 500;
   }
   .copy:hover { border-color: var(--accent); color: var(--accent); }
   .copy.ok { color: #22c55e; border-color: #1d4d33; }
-  .copymini { padding: 2px 8px; font-size: 12px; margin-left: 8px; }
-  details { margin-top: 10px; }
-  details summary {
-    cursor: pointer; font-size: 13px; color: var(--muted); user-select: none;
-  }
-  details[open] summary { color: var(--text); }
-  details pre {
-    white-space: pre-wrap; word-break: break-word; margin: 8px 0 0;
-    padding: 10px 12px; background: #0d1117; border: 1px solid var(--border);
-    border-radius: 8px; font: 13px/1.55 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-  }
   .empty { color: var(--muted); padding: 30px 0; text-align: center; }
   .empty b { color: var(--text); }
   footer { color: var(--muted); font-size: 12px; margin-top: 26px; text-align: center; }
@@ -158,18 +152,22 @@ function extractLinks(cell) {
 let DATA = null;
 let current = wibISO(new Date());
 
-function renderLinks(cell, label) {
+function fieldLinks(cell, label) {
   const { urls, text } = extractLinks(cell);
-  let h = "";
-  for (const u of urls) {
-    h += `<span class="linkpair"><a href="${esc(u)}" target="_blank" rel="noopener">${label}</a>` +
-         `<button class="copy" data-copy="${esc(JSON.stringify(u))}">Salin</button></span>`;
+  let body;
+  if (urls.length) {
+    body = urls.map(u =>
+      `<div><a class="rawlink" href="${esc(u)}" target="_blank" rel="noopener">${esc(u)}</a></div>`
+    ).join("");
+  } else if (text) {
+    body = `<div class="filechip">${esc(text)}</div>`;
+  } else {
+    body = `<div class="filechip">—</div>`;
   }
-  if (text && urls.length === 0) {
-    h += `<span class="linkpair"><span class="filechip">${esc(text)}</span>` +
-         `<button class="copy" data-copy="${esc(JSON.stringify(text))}">Salin</button></span>`;
-  }
-  return h;
+  const copyVal = urls.join("\n") || text || "";
+  const copyBtn = copyVal
+    ? `<button class="copy" data-copy="${esc(JSON.stringify(copyVal))}">Salin</button>` : "";
+  return `<div class="field"><div class="flabel">${esc(label)} ${copyBtn}</div>${body}</div>`;
 }
 
 function render() {
@@ -197,16 +195,12 @@ function render() {
       h += `<span class="pill ${stClass(it.status)}">${esc(it.status || "belum ada status")}</span>`;
       h += `</div>`;
       if (it.judul) h += `<p class="judul">${esc(it.judul)}</p>`;
-      if (it.tab) h += `<div class="meta">Tab: ${esc(it.tab)}</div>`;
-      h += `<div class="links">`;
-      h += renderLinks(it.link, "Link Konten");
-      h += renderLinks(it.cover, "Link Cover");
-      if (!it.link && !it.cover) h += `<span class="filechip">belum ada link</span>`;
-      h += `</div>`;
+      h += fieldLinks(it.link, "Link Content");
+      if (it.cover) h += fieldLinks(it.cover, "Link Cover");
       if (hasCaption) {
-        h += `<details><summary><span>Caption</span>` +
-             `<button class="copy copymini" data-copy="${esc(JSON.stringify(it.caption))}">Salin</button>` +
-             `</summary><pre>${esc(it.caption)}</pre></details>`;
+        h += `<div class="field"><div class="flabel">Caption ` +
+             `<button class="copy" data-copy="${esc(JSON.stringify(it.caption))}">Salin</button>` +
+             `</div><div class="captext">${esc(it.caption)}</div></div>`;
       }
       h += `</div>`;
     }

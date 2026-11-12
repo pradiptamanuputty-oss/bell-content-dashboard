@@ -1,5 +1,14 @@
 {
- "generated_at": "2026-11-12T11:05:43+07:00",
+ "generated_at": "2026-11-12T11:29:25+07:00",
+ "clients": {
+  "QJMOTOR": "https://docs.google.com/spreadsheets/d/13vyY4sw7Vh6Rs1D8GM-HstMfHKRbuZjjVzOvgkN1yxw/edit",
+  "Giyanti Coffee": "https://docs.google.com/spreadsheets/d/1Mk1fkzEzkMLkvZ53GTyAga3SQRFMSOzUaIGtIlGr9OE/edit",
+  "Mikkro Coffee": "https://docs.google.com/spreadsheets/d/1GVFxoS2auOP0F133Fk-p15bg4omnROvnc83C7QBKdKo/edit",
+  "Marvel": "https://docs.google.com/spreadsheets/d/1GzAEMHI6QUsKj-uqr8C4LiMJIJbkHehM6E60Xeqzv_U/edit",
+  "Honda NTB": "https://docs.google.com/spreadsheets/d/1E0YsWyI4bwP6bqOxGc0t-sh2iy14LIAEMEKCJmlPANU/edit",
+  "TikTok Astra": "https://docs.google.com/spreadsheets/d/1eurIHMVGKmpLfDuTscFrcq-RoQyg4ovvanW9y4NA_0k/edit",
+  "Socmed Bell": "https://docs.google.com/spreadsheets/d/1w9iRM9QeRQX_z0JAz_defESsAwPsID8GefL3WyqN35M/edit"
+ },
  "items": [
   {
    "klien": "QJMOTOR",
@@ -591,18 +600,6 @@
   },
   {
    "klien": "Giyanti Coffee",
-   "tanggal": "2026-11-12",
-   "status": "Content Preview",
-   "tipe": "Feed - Single Post",
-   "platform": "Instagram",
-   "judul": "Giyanti Breakfast",
-   "link": "261030 - Giyanti Breakfast.jpg",
-   "cover": "",
-   "caption": "A good morning starts with a satisfying breakfast. 🍳☕\n\nEnjoy sourdough, crispy hash browns, and quality meat, paired with a cup of coffee at Giyanti. \n\nYour morning ritual, made a little more special. \n\nCome join us for breakfast.\n\n——\n\nPagi yang baik dimulai dengan sarapan yang nikmat. 🍳☕\n\nNikmati sourdough, hash brown yang renyah, dan daging berkualitas, ditemani secangkir kopi di Giyanti. \n\nPerpaduan yang pas untuk memulai hari dengan lebih menyenangkan. \n\nYuk, sarapan di Giyanti!\n\n#GiyantiCoffeeRoastery #BreakfastAtGiyanti #CafeMenteng #CafeJakarta #BreakfastJakarta",
-   "tab": "26 November"
-  },
-  {
-   "klien": "Giyanti Coffee",
    "tanggal": "2026-11-10",
    "status": "Uploaded",
    "tipe": "Story",
@@ -611,6 +608,18 @@
    "link": "261110 - Hari Pahlawan",
    "cover": "",
    "caption": "",
+   "tab": "26 November"
+  },
+  {
+   "klien": "Giyanti Coffee",
+   "tanggal": "2026-11-12",
+   "status": "Client Content Preview",
+   "tipe": "Feed - Single Post",
+   "platform": "Instagram",
+   "judul": "Giyanti Breakfast",
+   "link": "261030 - Giyanti Breakfast.jpg",
+   "cover": "",
+   "caption": "A good morning starts with a satisfying breakfast. 🍳☕\n\nEnjoy sourdough, crispy hash browns, and quality meat, paired with a cup of coffee at Giyanti. \n\nYour morning ritual, made a little more special. \n\nCome join us for breakfast.\n\n——\n\nPagi yang baik dimulai dengan sarapan yang nikmat. 🍳☕\n\nNikmati sourdough, hash brown yang renyah, dan daging berkualitas, ditemani secangkir kopi di Giyanti. \n\nPerpaduan yang pas untuk memulai hari dengan lebih menyenangkan. \n\nYuk, sarapan di Giyanti!\n\n#GiyantiCoffeeRoastery #BreakfastAtGiyanti #CafeMenteng #CafeJakarta #BreakfastJakarta",
    "tab": "26 November"
   },
   {
@@ -940,7 +949,7 @@
   {
    "klien": "Mikkro Coffee",
    "tanggal": "2026-11-10",
-   "status": "Client Content Preview",
+   "status": "Uploaded",
    "tipe": "Feed - Single Post",
    "platform": "Instagram",
    "judul": "[Ken]\nMikkro Bata",
@@ -963,7 +972,7 @@
   },
   {
    "klien": "Mikkro Coffee",
-   "tanggal": "2026-11-12",
+   "tanggal": "2026-11-13",
    "status": "",
    "tipe": "Threads",
    "platform": "Threads",

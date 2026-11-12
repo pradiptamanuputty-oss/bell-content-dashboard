@@ -46,7 +46,14 @@
   .daylabel { margin: 18px 0 6px; font-weight: 600; font-size: 16px; }
   #summary { color: var(--muted); font-size: 13px; margin: 0 0 14px; }
   .client { margin: 18px 0 10px; font-weight: 700; font-size: 13px; text-transform: uppercase;
-            letter-spacing: .06em; color: var(--accent); }
+            letter-spacing: .06em; color: var(--accent);
+            display: flex; align-items: center; justify-content: space-between; gap: 8px; }
+  .epbtn {
+    font-size: 11.5px; font-weight: 500; letter-spacing: .02em; text-transform: none;
+    color: var(--muted); border: 1px solid var(--border); border-radius: 6px;
+    padding: 3px 9px; text-decoration: none; white-space: nowrap;
+  }
+  .epbtn:hover { border-color: var(--accent); color: var(--accent); }
   .card {
     background: var(--card); border: 1px solid var(--border); border-radius: 12px;
     padding: 14px; margin-bottom: 10px;
@@ -170,6 +177,11 @@ function fieldLinks(cell, label) {
   return `<div class="field"><div class="flabel">${esc(label)} ${copyBtn}</div>${body}</div>`;
 }
 
+function epBtn(k) {
+  const u = DATA && DATA.clients && DATA.clients[k];
+  return u ? `<a class="epbtn" href="${esc(u)}" target="_blank" rel="noopener">Buka EP ↗</a>` : "";
+}
+
 function render() {
   const items = DATA.items.filter(i => i.tanggal === current);
   $("daylabel").textContent = fmtHari(current);
@@ -185,7 +197,7 @@ function render() {
 
   let h = "";
   for (const k of Object.keys(groups)) {
-    h += `<div class="client">${esc(k)}</div>`;
+    h += `<div class="client"><span>${esc(k)}</span>${epBtn(k)}</div>`;
     for (const it of groups[k]) {
       const hasCaption = (it.caption || "").trim().length > 0;
       h += `<div class="card">`;
@@ -214,7 +226,7 @@ function render() {
     for (const it of uns) (by[it.klien] = by[it.klien] || []).push(it);
     let uh = `<h3>Belum terjadwal (${uns.length})</h3>`;
     for (const k of Object.keys(by)) {
-      uh += `<div class="client">${esc(k)}</div>`;
+      uh += `<div class="client"><span>${esc(k)}</span>${epBtn(k)}</div>`;
       for (const it of by[k]) {
         uh += `<div class="card"><div class="pills">`;
         uh += `<span class="pill platform">${esc(it.platform || "—")}</span>`;

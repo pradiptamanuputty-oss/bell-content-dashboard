@@ -1,0 +1,244 @@
+<!doctype html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Bell — Jadwal Upload</title>
+<style>
+  :root {
+    --bg: #0b0e13;
+    --card: #141922;
+    --border: #232b3a;
+    --text: #e6e9ef;
+    --muted: #8b93a3;
+    --accent: #8b7cff;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font: 15px/1.5 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    min-height: 100vh;
+  }
+  .wrap { max-width: 680px; margin: 0 auto; padding: 16px 16px 40px; }
+  header {
+    position: sticky; top: 0; z-index: 5;
+    background: rgba(11,14,19,.92); backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--border);
+  }
+  header .inner { max-width: 680px; margin: 0 auto; padding: 12px 16px; }
+  .brand { font-weight: 700; letter-spacing: .08em; font-size: 13px; color: var(--accent); }
+  .brand span { color: var(--text); letter-spacing: 0; margin-left: 6px; font-weight: 600; }
+  .datebar { display: flex; align-items: center; gap: 8px; margin-top: 10px; flex-wrap: wrap; }
+  .datebar input[type=date] {
+    flex: 1; min-width: 0; background: var(--card); color: var(--text);
+    border: 1px solid var(--border); border-radius: 8px; padding: 8px 10px;
+    font: inherit; color-scheme: dark;
+  }
+  .datebar button {
+    background: var(--card); color: var(--text); border: 1px solid var(--border);
+    border-radius: 8px; padding: 8px 12px; font: inherit; cursor: pointer;
+  }
+  .datebar button:hover { border-color: var(--accent); color: var(--accent); }
+  #today { background: var(--accent); border-color: var(--accent); color: #0b0e13; font-weight: 600; }
+  #today:hover { opacity: .85; color: #0b0e13; }
+  .daylabel { margin: 18px 0 6px; font-weight: 600; font-size: 16px; }
+  #summary { color: var(--muted); font-size: 13px; margin: 0 0 14px; }
+  .client { margin: 18px 0 10px; font-weight: 700; font-size: 13px; text-transform: uppercase;
+            letter-spacing: .06em; color: var(--accent); }
+  .card {
+    background: var(--card); border: 1px solid var(--border); border-radius: 12px;
+    padding: 14px; margin-bottom: 10px;
+  }
+  .pills { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 8px; }
+  .pill {
+    font-size: 11.5px; padding: 3px 9px; border-radius: 999px;
+    border: 1px solid var(--border); color: var(--muted);
+  }
+  .pill.platform { color: var(--text); border-color: #3a4660; }
+  .st-0 { color: #22c55e; border-color: #1d4d33; }   /* aired */
+  .st-1 { color: #3b82f6; border-color: #1e3a5f; }   /* ready */
+  .st-2 { color: #f59e0b; border-color: #4a3a12; }   /* preview/acc */
+  .st-3 { color: #ef4444; border-color: #4a2020; }   /* revision */
+  .st-4 { color: #94a3b8; }                          /* production */
+  .st-9 { color: #64748b; }                          /* kosong */
+  .judul { font-weight: 600; margin: 0 0 4px; }
+  .meta { font-size: 12.5px; color: var(--muted); margin-bottom: 10px; }
+  .links { display: flex; gap: 8px; flex-wrap: wrap; }
+  .links a {
+    display: inline-block; text-decoration: none; font-size: 13px; font-weight: 600;
+    color: var(--accent); border: 1px solid #3a3a5e; border-radius: 8px; padding: 6px 12px;
+  }
+  .links a:hover { background: #1a1629; }
+  .links .filechip {
+    font-size: 12px; color: var(--muted); border: 1px dashed var(--border);
+    border-radius: 8px; padding: 6px 10px; word-break: break-all;
+  }
+  details { margin-top: 10px; }
+  details summary {
+    cursor: pointer; font-size: 13px; color: var(--muted); user-select: none;
+  }
+  details[open] summary { color: var(--text); }
+  details pre {
+    white-space: pre-wrap; word-break: break-word; margin: 8px 0 0;
+    padding: 10px 12px; background: #0d1117; border: 1px solid var(--border);
+    border-radius: 8px; font: 13px/1.55 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  }
+  .empty { color: var(--muted); padding: 30px 0; text-align: center; }
+  .empty b { color: var(--text); }
+  footer { color: var(--muted); font-size: 12px; margin-top: 26px; text-align: center; }
+  #unsched { margin-top: 26px; }
+  #unsched h3 { font-size: 13px; color: var(--muted); text-transform: uppercase; letter-spacing: .06em; }
+</style>
+</head>
+<body>
+<header><div class="inner">
+  <div class="brand">BELL<span>Jadwal Upload</span></div>
+  <div class="datebar">
+    <button id="prev" aria-label="sebelumnya">‹</button>
+    <input type="date" id="pick">
+    <button id="next" aria-label="berikutnya">›</button>
+    <button id="today">Hari ini</button>
+  </div>
+</div></header>
+<div class="wrap">
+  <div class="daylabel" id="daylabel"></div>
+  <div id="summary"></div>
+  <div id="list"></div>
+  <div id="unsched"></div>
+  <footer id="foot">memuat data…</footer>
+</div>
+<script>
+"use strict";
+const HARI = ["Minggu","Senin","Selasa","Rabu","Kamis","Jumat","Sabtu"];
+const BULAN = ["Jan","Feb","Mar","Apr","Mei","Jun","Jul","Agu","Sep","Okt","Nov","Des"];
+const $ = id => document.getElementById(id);
+
+function wibISO(d) {
+  const t = new Date(d.getTime() + 7 * 3600e3); // geser ke WIB lalu ambil komponen UTC
+  return t.toISOString().slice(0, 10);
+}
+function shiftISO(iso, delta) {
+  const d = new Date(iso + "T12:00:00Z");
+  d.setUTCDate(d.getUTCDate() + delta);
+  return d.toISOString().slice(0, 10);
+}
+function fmtHari(iso) {
+  const d = new Date(iso + "T12:00:00Z");
+  return HARI[d.getUTCDay()] + ", " + d.getUTCDate() + " " + BULAN[d.getUTCMonth()] + " " + d.getUTCFullYear();
+}
+function esc(s) {
+  return String(s ?? "").replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+}
+function stClass(status) {
+  const s = (status || "").toLowerCase();
+  if (s.includes("uploaded") || s.includes("scheduled")) return "st-0";
+  if (s.includes("ready") || s.includes("approved")) return "st-1";
+  if (s.includes("preview") || s.includes("acc")) return "st-2";
+  if (s.includes("revision")) return "st-3";
+  if (s.includes("production") || s.includes("asset ready")) return "st-4";
+  return "st-9";
+}
+function extractLinks(cell) {
+  const urls = String(cell || "").match(/https?:\/\/[^\s"'<>]+/g) || [];
+  const txt = String(cell || "").trim();
+  return { urls, text: txt };
+}
+
+let DATA = null;
+let current = wibISO(new Date());
+
+function renderLinks(cell, label) {
+  const { urls, text } = extractLinks(cell);
+  let h = "";
+  for (const u of urls) h += `<a href="${esc(u)}" target="_blank" rel="noopener">${label}</a>`;
+  if (text && urls.length === 0) h += `<span class="filechip">${esc(text)}</span>`;
+  return h;
+}
+
+function render() {
+  const items = DATA.items.filter(i => i.tanggal === current);
+  $("daylabel").textContent = fmtHari(current);
+  $("pick").value = current;
+
+  const klien = new Set(items.map(i => i.klien));
+  $("summary").textContent = items.length
+    ? items.length + " konten · " + klien.size + " klien"
+    : "Tidak ada konten terjadwal di tanggal ini";
+
+  const groups = {};
+  for (const it of items) (groups[it.klien] = groups[it.klien] || []).push(it);
+
+  let h = "";
+  for (const k of Object.keys(groups)) {
+    h += `<div class="client">${esc(k)}</div>`;
+    for (const it of groups[k]) {
+      const hasCaption = (it.caption || "").trim().length > 0;
+      h += `<div class="card">`;
+      h += `<div class="pills">`;
+      h += `<span class="pill platform">${esc(it.platform || "—")}</span>`;
+      if (it.tipe) h += `<span class="pill">${esc(it.tipe)}</span>`;
+      h += `<span class="pill ${stClass(it.status)}">${esc(it.status || "belum ada status")}</span>`;
+      h += `</div>`;
+      if (it.judul) h += `<p class="judul">${esc(it.judul)}</p>`;
+      if (it.tab) h += `<div class="meta">Tab: ${esc(it.tab)}</div>`;
+      h += `<div class="links">`;
+      h += renderLinks(it.link, "Link Konten");
+      h += renderLinks(it.cover, "Link Cover");
+      if (!it.link && !it.cover) h += `<span class="filechip">belum ada link</span>`;
+      h += `</div>`;
+      if (hasCaption) {
+        h += `<details><summary>Caption</summary><pre>${esc(it.caption)}</pre></details>`;
+      }
+      h += `</div>`;
+    }
+  }
+  $("list").innerHTML = h || `<div class="empty"><b>Tidak ada konten</b> untuk ${fmtHari(current)}.</div>`;
+
+  // belum terjadwal — hanya di tampilan hari ini
+  const uns = DATA.items.filter(i => !i.tanggal);
+  if (current === wibISO(new Date()) && uns.length) {
+    const by = {};
+    for (const it of uns) (by[it.klien] = by[it.klien] || []).push(it);
+    let uh = `<h3>Belum terjadwal (${uns.length})</h3>`;
+    for (const k of Object.keys(by)) {
+      uh += `<div class="client">${esc(k)}</div>`;
+      for (const it of by[k]) {
+        uh += `<div class="card"><div class="pills">`;
+        uh += `<span class="pill platform">${esc(it.platform || "—")}</span>`;
+        if (it.tipe) uh += `<span class="pill">${esc(it.tipe)}</span>`;
+        uh += `<span class="pill ${stClass(it.status)}">${esc(it.status || "belum ada status")}</span>`;
+        uh += `</div>`;
+        if (it.judul) uh += `<p class="judul">${esc(it.judul)}</p>`;
+        uh += `</div>`;
+      }
+    }
+    $("unsched").innerHTML = uh;
+  } else {
+    $("unsched").innerHTML = "";
+  }
+}
+
+async function init() {
+  const r = await fetch("data.json", { cache: "no-store" });
+  if (!r.ok) throw new Error("HTTP " + r.status);
+  DATA = await r.json();
+  const g = DATA.generated_at ? new Date(DATA.generated_at) : null;
+  $("foot").textContent = g
+    ? "Data diperbarui: " + g.toLocaleString("id-ID", { timeZone: "Asia/Jakarta" }) + " WIB"
+    : "Data diperbarui: —";
+  render();
+}
+
+$("pick").addEventListener("change", e => { current = e.target.value; render(); });
+$("prev").addEventListener("click", () => { current = shiftISO(current, -1); render(); });
+$("next").addEventListener("click", () => { current = shiftISO(current, 1); render(); });
+$("today").addEventListener("click", () => { current = wibISO(new Date()); render(); });
+
+init().catch(err => {
+  $("list").innerHTML = `<div class="empty">Gagal memuat data (${esc(err.message)}).<br>Coba muat ulang halaman.</div>`;
+});
+</script>
+</body>
+</html>

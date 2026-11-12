@@ -44,7 +44,10 @@
   #today { background: var(--accent); border-color: var(--accent); color: #0b0e13; font-weight: 600; }
   #today:hover { opacity: .85; color: #0b0e13; }
   .daylabel { margin: 18px 0 6px; font-weight: 600; font-size: 16px; }
-  #summary { color: var(--muted); font-size: 13px; margin: 0 0 14px; }
+  .summaryrow { display: flex; justify-content: space-between; align-items: baseline;
+                gap: 10px; margin: 0 0 14px; }
+  #summary { color: var(--muted); font-size: 13px; margin: 0; }
+  #lastupd { color: var(--muted); font-size: 12px; white-space: nowrap; }
   .client { margin: 18px 0 10px; font-weight: 700; font-size: 13px; text-transform: uppercase;
             letter-spacing: .06em; color: var(--accent);
             display: flex; align-items: center; justify-content: space-between; gap: 8px; }
@@ -114,7 +117,7 @@
 </div></header>
 <div class="wrap">
   <div class="daylabel" id="daylabel"></div>
-  <div id="summary"></div>
+  <div class="summaryrow"><div id="summary"></div><div id="lastupd"></div></div>
   <div id="list"></div>
   <div id="unsched"></div>
   <footer id="foot">memuat data…</footer>
@@ -243,6 +246,16 @@ function render() {
   }
 }
 
+function relTime(g) {
+  const s = Math.max(0, Math.floor((Date.now() - g.getTime()) / 1000));
+  if (s < 60) return "baru saja";
+  const m = Math.floor(s / 60);
+  if (m < 60) return m + " menit lalu";
+  const h = Math.floor(m / 60);
+  if (h < 24) return h + " jam lalu";
+  return Math.floor(h / 24) + " hari lalu";
+}
+
 async function init() {
   const r = await fetch("data.json", { cache: "no-store" });
   if (!r.ok) throw new Error("HTTP " + r.status);
@@ -251,6 +264,7 @@ async function init() {
   $("foot").textContent = g
     ? "Data diperbarui: " + g.toLocaleString("id-ID", { timeZone: "Asia/Jakarta" }) + " WIB"
     : "Data diperbarui: —";
+  $("lastupd").textContent = g ? "Update: " + relTime(g) : "Update: —";
   render();
 }
 

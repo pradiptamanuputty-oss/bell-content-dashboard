@@ -202,7 +202,6 @@ function render() {
   for (const k of Object.keys(groups)) {
     h += `<div class="client"><span>${esc(k)}</span>${epBtn(k)}</div>`;
     for (const it of groups[k]) {
-      const hasCaption = (it.caption || "").trim().length > 0;
       h += `<div class="card">`;
       h += `<div class="pills">`;
       h += `<span class="pill platform">${esc(it.platform || "—")}</span>`;
@@ -212,11 +211,11 @@ function render() {
       if (it.judul) h += `<p class="judul">${esc(it.judul)}</p>`;
       h += fieldLinks(it.link, "Link Content");
       if (it.cover) h += fieldLinks(it.cover, "Link Cover");
-      if (hasCaption) {
-        h += `<div class="field"><div class="flabel">Caption ` +
-             `<button class="copy" data-copy="${esc(JSON.stringify(it.caption))}">Salin</button>` +
-             `</div><div class="captext">${esc(it.caption)}</div></div>`;
-      }
+      const cap = (it.caption || "").trim();
+      const capBtn = cap
+        ? `<button class="copy" data-copy="${esc(JSON.stringify(it.caption))}">Salin</button>` : "";
+      h += `<div class="field"><div class="flabel">Caption ${capBtn}</div>` +
+           `<div class="captext">${cap ? esc(it.caption) : "—"}</div></div>`;
       h += `</div>`;
     }
   }

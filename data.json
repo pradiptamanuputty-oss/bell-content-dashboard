@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-11-12T13:29:10+07:00",
+ "generated_at": "2026-11-12T13:36:57+07:00",
  "clients": {
   "QJMOTOR": "https://docs.google.com/spreadsheets/d/13vyY4sw7Vh6Rs1D8GM-HstMfHKRbuZjjVzOvgkN1yxw/edit",
   "Giyanti Coffee": "https://docs.google.com/spreadsheets/d/1Mk1fkzEzkMLkvZ53GTyAga3SQRFMSOzUaIGtIlGr9OE/edit",
@@ -87,7 +87,7 @@
   {
    "klien": "QJMOTOR",
    "tanggal": "2026-11-11",
-   "status": "Ready to Post",
+   "status": "Uploaded",
    "tipe": "Reels Videos",
    "platform": "Instagram",
    "judul": "Fitur AMT",
@@ -965,7 +965,7 @@
    "tanggal": "2026-10-04",
    "status": "Uploaded",
    "tipe": "Feed - Single Post, TikTok Picture/Design",
-   "platform": "TikTok",
+   "platform": "Instagram + TikTok",
    "judul": "Motorku X, Perawatan Motor, Service & Spare Parts — Servis di AHASS, pakai Motorku X",
    "link": "https://drive.google.com/drive/folders/1BQkgGHYQcjN_5piFNRe3e9QROA0IJcLG",
    "cover": "",
@@ -1205,7 +1205,7 @@
    "tanggal": "2026-10-13",
    "status": "Uploaded",
    "tipe": "Feed - Single Post, TikTok Picture/Design",
-   "platform": "TikTok",
+   "platform": "Instagram + TikTok",
    "judul": "Amanda, Genio — Fitur Program Bulanan Amanda:\n- Katalog & Promo Spesial\n- Simulasi Kredit",
    "link": "https://drive.google.com/drive/folders/1wgEyacQgs8i8lrsAKs7pHt3AJaJCZmw0",
    "cover": "",
@@ -1229,7 +1229,7 @@
    "tanggal": "2026-10-14",
    "status": "Uploaded",
    "tipe": "Reels IG Videos, Reels/TikTok Videos",
-   "platform": "TikTok",
+   "platform": "Instagram + TikTok",
    "judul": "Motorku X — Aplikasi Motorku-X banyak diskon dan merchant",
    "link": "https://drive.google.com/drive/folders/1qgiHdlnOLRXkpQI1P5L5lf7yFr7SsgOR",
    "cover": "",
@@ -1265,7 +1265,7 @@
    "tanggal": "2026-10-17",
    "status": "Uploaded",
    "tipe": "Feed - Single Post, TikTok Picture/Design",
-   "platform": "TikTok",
+   "platform": "Instagram + TikTok",
    "judul": "Motorku X, Vario 160 — Kumpulkan Poin HepiGo dari Daily Challenge Motorku X",
    "link": "https://drive.google.com/drive/folders/1N15ErcHptZhcAOK00kX7-Rz9mFTGan8_",
    "cover": "",
@@ -1346,24 +1346,24 @@
   },
   {
    "klien": "Honda NTB",
-   "tanggal": "2026-10-24",
-   "status": "Uploaded",
-   "tipe": "Reels/TikTok Videos",
-   "platform": "TikTok",
-   "judul": "Amanda — Gaada Waktu Buat Pasangan",
-   "link": "",
-   "cover": "",
-   "caption": "",
-   "tab": "OKT 2026"
-  },
-  {
-   "klien": "Honda NTB",
    "tanggal": "2026-10-23",
    "status": "Uploaded",
    "tipe": "Feed - Carousel Post",
    "platform": "Instagram",
    "judul": "BeAT Street, Vario 125 Street — Street Fighter pakai Honda Street Series",
    "link": "https://drive.google.com/drive/folders/1U3Tx2UvdWgA3SZttevcO-emF2-KnwRiM",
+   "cover": "",
+   "caption": "",
+   "tab": "OKT 2026"
+  },
+  {
+   "klien": "Honda NTB",
+   "tanggal": "2026-10-24",
+   "status": "Uploaded",
+   "tipe": "Reels/TikTok Videos",
+   "platform": "Instagram + TikTok",
+   "judul": "Amanda — Gaada Waktu Buat Pasangan",
+   "link": "",
    "cover": "",
    "caption": "",
    "tab": "OKT 2026"
@@ -1406,18 +1406,6 @@
   },
   {
    "klien": "Honda NTB",
-   "tanggal": "2026-10-27",
-   "status": "Uploaded",
-   "tipe": "Reels/TikTok Videos",
-   "platform": "TikTok",
-   "judul": "Ada Honda di Setiap Cerita",
-   "link": "",
-   "cover": "",
-   "caption": "",
-   "tab": "OKT 2026"
-  },
-  {
-   "klien": "Honda NTB",
    "tanggal": "2026-10-26",
    "status": "Caption Preview",
    "tipe": "TikTok Videos",
@@ -1426,6 +1414,18 @@
    "link": "",
    "cover": "",
    "caption": "Motor baru memang bikin pengen langsung gaspol, tapi tahan dulu! 😜\n\nYuk cari tahu alasannya di video ini!\n\n#AstraMotorNTB #HondaNTB #MotorBaru #TipsPerawatanMotor #TipsMotor",
+   "tab": "OKT 2026"
+  },
+  {
+   "klien": "Honda NTB",
+   "tanggal": "2026-10-27",
+   "status": "Uploaded",
+   "tipe": "Reels/TikTok Videos",
+   "platform": "Instagram + TikTok",
+   "judul": "Ada Honda di Setiap Cerita",
+   "link": "",
+   "cover": "",
+   "caption": "",
    "tab": "OKT 2026"
   },
   {

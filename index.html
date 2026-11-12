@@ -75,6 +75,15 @@
     font-size: 12px; color: var(--muted); border: 1px dashed var(--border);
     border-radius: 8px; padding: 6px 10px; word-break: break-all;
   }
+  .linkpair { display: inline-flex; align-items: center; gap: 6px; }
+  .copy {
+    background: none; color: var(--muted); border: 1px solid var(--border);
+    border-radius: 8px; padding: 6px 12px; font: inherit; font-size: 13px;
+    cursor: pointer; white-space: nowrap;
+  }
+  .copy:hover { border-color: var(--accent); color: var(--accent); }
+  .copy.ok { color: #22c55e; border-color: #1d4d33; }
+  .copymini { padding: 2px 8px; font-size: 12px; margin-left: 8px; }
   details { margin-top: 10px; }
   details summary {
     cursor: pointer; font-size: 13px; color: var(--muted); user-select: none;
@@ -152,8 +161,14 @@ let current = wibISO(new Date());
 function renderLinks(cell, label) {
   const { urls, text } = extractLinks(cell);
   let h = "";
-  for (const u of urls) h += `<a href="${esc(u)}" target="_blank" rel="noopener">${label}</a>`;
-  if (text && urls.length === 0) h += `<span class="filechip">${esc(text)}</span>`;
+  for (const u of urls) {
+    h += `<span class="linkpair"><a href="${esc(u)}" target="_blank" rel="noopener">${label}</a>` +
+         `<button class="copy" data-copy="${esc(JSON.stringify(u))}">Salin</button></span>`;
+  }
+  if (text && urls.length === 0) {
+    h += `<span class="linkpair"><span class="filechip">${esc(text)}</span>` +
+         `<button class="copy" data-copy="${esc(JSON.stringify(text))}">Salin</button></span>`;
+  }
   return h;
 }
 
@@ -189,7 +204,9 @@ function render() {
       if (!it.link && !it.cover) h += `<span class="filechip">belum ada link</span>`;
       h += `</div>`;
       if (hasCaption) {
-        h += `<details><summary>Caption</summary><pre>${esc(it.caption)}</pre></details>`;
+        h += `<details><summary><span>Caption</span>` +
+             `<button class="copy copymini" data-copy="${esc(JSON.stringify(it.caption))}">Salin</button>` +
+             `</summary><pre>${esc(it.caption)}</pre></details>`;
       }
       h += `</div>`;
     }
@@ -235,6 +252,31 @@ $("pick").addEventListener("change", e => { current = e.target.value; render(); 
 $("prev").addEventListener("click", () => { current = shiftISO(current, -1); render(); });
 $("next").addEventListener("click", () => { current = shiftISO(current, 1); render(); });
 $("today").addEventListener("click", () => { current = wibISO(new Date()); render(); });
+
+async function copyText(t) {
+  try { await navigator.clipboard.writeText(t); return true; }
+  catch (e) {
+    const ta = document.createElement("textarea");
+    ta.value = t; ta.style.position = "fixed"; ta.style.opacity = "0";
+    document.body.appendChild(ta); ta.select();
+    let ok = false;
+    try { ok = document.execCommand("copy"); } catch (e2) { ok = false; }
+    ta.remove();
+    return ok;
+  }
+}
+document.addEventListener("click", async e => {
+  const btn = e.target.closest("[data-copy]");
+  if (!btn) return;
+  e.preventDefault();
+  e.stopPropagation();
+  const t = JSON.parse(btn.dataset.copy);
+  const ok = await copyText(t);
+  const old = btn.textContent;
+  btn.textContent = ok ? "✓ Tersalin" : "Gagal";
+  btn.classList.add("ok");
+  setTimeout(() => { btn.textContent = old; btn.classList.remove("ok"); }, 1600);
+});
 
 init().catch(err => {
   $("list").innerHTML = `<div class="empty">Gagal memuat data (${esc(err.message)}).<br>Coba muat ulang halaman.</div>`;

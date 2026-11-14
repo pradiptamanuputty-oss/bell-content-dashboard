@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-11-14T17:00:06+07:00",
+ "generated_at": "2026-11-14T18:02:04+07:00",
  "clients": {
   "QJMOTOR": "https://docs.google.com/spreadsheets/d/13vyY4sw7Vh6Rs1D8GM-HstMfHKRbuZjjVzOvgkN1yxw/edit",
   "Giyanti Coffee": "https://docs.google.com/spreadsheets/d/1Mk1fkzEzkMLkvZ53GTyAga3SQRFMSOzUaIGtIlGr9OE/edit",
@@ -291,7 +291,7 @@
   {
    "klien": "Giyanti Coffee",
    "tanggal": "2026-11-13",
-   "status": "Ready to Post",
+   "status": "Uploaded",
    "tipe": "Feed - Single Post",
    "platform": "Instagram",
    "judul": "Giyanti Breakfast",
@@ -303,7 +303,7 @@
   {
    "klien": "Giyanti Coffee",
    "tanggal": "2026-11-15",
-   "status": "Asset Ready",
+   "status": "Pending",
    "tipe": "Feed - Single Post",
    "platform": "Instagram",
    "judul": "Papan daftar Kopi",
@@ -578,7 +578,7 @@
   },
   {
    "klien": "Mikkro Coffee",
-   "tanggal": "2026-11-13",
+   "tanggal": "2026-11-14",
    "status": "Asset Ready",
    "tipe": "Reels Videos",
    "platform": "Instagram",
@@ -590,7 +590,19 @@
   },
   {
    "klien": "Mikkro Coffee",
-   "tanggal": "2026-11-14",
+   "tanggal": "2026-11-15",
+   "status": "Asset Ready",
+   "tipe": "Threads",
+   "platform": "Threads",
+   "judul": "",
+   "link": "",
+   "cover": "",
+   "caption": "",
+   "tab": "26 Nov"
+  },
+  {
+   "klien": "Mikkro Coffee",
+   "tanggal": "2026-11-15",
    "status": "Asset Ready",
    "tipe": "Feed - Single Post",
    "platform": "Instagram",
@@ -602,7 +614,7 @@
   },
   {
    "klien": "Mikkro Coffee",
-   "tanggal": "2026-11-30",
+   "tanggal": "2026-11-16",
    "status": "Asset Ready",
    "tipe": "Reels Videos",
    "platform": "Instagram",

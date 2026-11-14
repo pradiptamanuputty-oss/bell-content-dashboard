@@ -7,6 +7,7 @@ on:
 
 permissions:
   contents: write
+  actions: write
 
 jobs:
   sync:
@@ -26,6 +27,7 @@ jobs:
           GOOGLE_CLIENT_SECRET: ${{ secrets.GOOGLE_CLIENT_SECRET }}
           GOOGLE_TOKEN_URI: ${{ secrets.GOOGLE_TOKEN_URI }}
       - name: Commit data.json bila berubah
+        id: commit
         run: |
           git config user.name "bell-sync-bot"
           git config user.email "sync@bell.local"
@@ -33,6 +35,15 @@ jobs:
             git add data.json
             git commit -m "data: sync $(date -u '+%F %H:%M')"
             git push
+            echo "changed=true" >> "$GITHUB_OUTPUT"
           else
             echo "tidak ada perubahan"
+            echo "changed=false" >> "$GITHUB_OUTPUT"
           fi
+      - name: Trigger Pages deploy
+        if: steps.commit.outputs.changed == 'true'
+        # Push via GITHUB_TOKEN tidak memicu workflow 'push' lain (anti-rekursi),
+        # jadi Pages harus ditrigger eksplisit.
+        run: gh workflow run pages.yml --repo ${{ github.repository }}
+        env:
+          GH_TOKEN: ${{ github.token }}

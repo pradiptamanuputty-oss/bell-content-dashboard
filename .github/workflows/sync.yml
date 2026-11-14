@@ -1,0 +1,38 @@
+name: Sync EP data
+
+on:
+  schedule:
+    - cron: "*/5 * * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install -q google-api-python-client google-auth
+      - name: Pull EP ke data.json
+        working-directory: sync
+        run: python ep_mirror_sync.py --json-out ../data.json
+        env:
+          GOOGLE_REFRESH_TOKEN: ${{ secrets.GOOGLE_REFRESH_TOKEN }}
+          GOOGLE_CLIENT_ID: ${{ secrets.GOOGLE_CLIENT_ID }}
+          GOOGLE_CLIENT_SECRET: ${{ secrets.GOOGLE_CLIENT_SECRET }}
+          GOOGLE_TOKEN_URI: ${{ secrets.GOOGLE_TOKEN_URI }}
+      - name: Commit data.json bila berubah
+        run: |
+          git config user.name "bell-sync-bot"
+          git config user.email "sync@bell.local"
+          if ! git diff --quiet data.json; then
+            git add data.json
+            git commit -m "data: sync $(date -u '+%F %H:%M')"
+            git push
+          else
+            echo "tidak ada perubahan"
+          fi

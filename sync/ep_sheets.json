@@ -1,0 +1,16 @@
+{
+  "mirror_sheet_id": "15_HsSwTVCO_W1EgLuosdJjG1exUttLP5vEWNbBzKgoU",
+  "mirror_name": "Bell Master EP",
+  "folder_id": "1NxJAjM_-1UJ5igl42uEqgj3Eg7orBuTE",
+  "clients": [
+    { "name": "QJMOTOR", "sheet": "13vyY4sw7Vh6Rs1D8GM-HstMfHKRbuZjjVzOvgkN1yxw", "status": "aktif", "module": "qjmotor" },
+    { "name": "Giyanti Coffee", "sheet": "1Mk1fkzEzkMLkvZ53GTyAga3SQRFMSOzUaIGtIlGr9OE", "status": "aktif", "module": "giyanti" },
+    { "name": "Mikkro Coffee", "sheet": "1GVFxoS2auOP0F133Fk-p15bg4omnROvnc83C7QBKdKo", "status": "aktif", "module": "mikkro" },
+    { "name": "Marvel", "sheet": "1GzAEMHI6QUsKj-uqr8C4LiMJIJbkHehM6E60Xeqzv_U", "status": "aktif", "module": "marvel" },
+    { "name": "Honda NTB", "sheet": "1E0YsWyI4bwP6bqOxGc0t-sh2iy14LIAEMEKCJmlPANU", "status": "aktif", "module": "honda_ntb" },
+    { "name": "TikTok Astra", "sheet": "1eurIHMVGKmpLfDuTscFrcq-RoQyg4ovvanW9y4NA_0k", "status": "aktif", "module": "tiktok_astra" },
+    { "name": "Socmed Bell", "sheet": "1w9iRM9QeRQX_z0JAz_defESsAwPsID8GefL3WyqN35M", "status": "aktif", "module": "socmed_bell" },
+    { "name": "Borobudur Park", "sheet": "1cdoKlnwGBKAVHI1sjrKpv8I19DLNKZ3vRzShWCZODrY", "status": "past" },
+    { "name": "Prambanan Park", "sheet": "1xL5p0bJQb-6NK4f3uXIpX9SGDUvqpyVuU02nw4xBWf0", "status": "past" }
+  ]
+}
